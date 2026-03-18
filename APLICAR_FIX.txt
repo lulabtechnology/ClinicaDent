@@ -1,0 +1,11 @@
+REEMPLAZA / AGREGA SOLO ESTOS ARCHIVOS EN LA RAÍZ DEL REPO:
+
+1) Reemplaza package.json por este.
+2) Agrega vercel.json en la raíz.
+
+RECOMENDADO:
+- Si en GitHub ves package-lock.json, bórralo antes de volver a desplegar.
+
+LUEGO:
+- haz commit
+- redeploy en Vercel

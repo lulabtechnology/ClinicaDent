@@ -2,7 +2,14 @@
   "name": "orthoclinix-landing",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "framer-motion": "^11.18.2",
     "next": "15.2.4",
