@@ -431,7 +431,7 @@ export default function Home() {
         </div>
       </section>
 
-      <EditorialVideo id="video-01" title="Conoce mejor la clínica, la forma de atención y el cuidado puesto en cada detalle." text="Aquí puede ir un recorrido breve, una explicación clínica o una pieza audiovisual que ayude a transmitir confianza y claridad. Al tocar la portada, el video se abre completo y sin recortes dentro de la landing." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" onOpen={setActiveVideo} />
+      <EditorialVideo id="video-01" title="Recorre la clínica y mira cómo se explican los casos dentro de Orthoclinix." text="Este video presenta el ambiente de la clínica, la forma de atención dentro del consultorio y ejemplos visuales de cambios en pacientes, para que la experiencia se entienda mejor antes de agendar." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" onOpen={setActiveVideo} />
       <section className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
           <Reveal className="max-w-xl xl:pb-8">
@@ -475,43 +475,68 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.08} className="rounded-[2.2rem] border border-white/70 bg-white/[0.78] p-6 shadow-soft backdrop-blur sm:p-8">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
               <div>
-                <SectionKicker dark>Reseñas</SectionKicker>
-                <h3 className="mt-5 font-serif text-[2.2rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3rem]">Reseñas reales que puedes revisar directamente en Google Maps.</h3>
-              </div>
-              <div className="rounded-[1.6rem] border border-black/10 bg-[#f7f2eb] px-5 py-4 shadow-card">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google Maps</p>
-                <div className="mt-3 flex items-end gap-3">
-                  <span className="font-serif text-[3rem] leading-none text-navy">33</span>
-                  <span className="pb-1 text-sm font-medium text-navy">reseñas · 5★ promedio</span>
+                <SectionKicker dark>Google Maps</SectionKicker>
+                <h3 className="mt-5 font-serif text-[2.2rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3rem]">Reseñas reales y ficha visible de la clínica, integradas de forma directa.</h3>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-slate sm:text-lg">Aquí sí aparece la referencia de Google Maps de Orthoclinix para que el paciente pueda ubicar la clínica, revisar la ficha y entrar a las reseñas desde un bloque visual más reconocible y confiable.</p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Abrir Google Maps</Link>
+                  <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">Agendar por WhatsApp</Link>
+                </div>
+                <div className="mt-7 grid gap-4 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google rating</p>
+                    <div className="mt-3 flex items-end gap-3">
+                      <span className="font-serif text-[2.7rem] leading-none text-navy">33</span>
+                      <span className="pb-1 text-sm font-medium text-navy">reseñas</span>
+                    </div>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Promedio</p>
+                    <p className="mt-3 font-serif text-[2.7rem] leading-none text-navy">5.0★</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ubicación</p>
+                    <p className="mt-3 text-sm leading-7 text-ink">Vía Argentina, El Cangrejo, dentro de la ficha de Google Maps de la clínica.</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-slate sm:text-lg">Integramos un acceso directo para que pacientes nuevos puedan validar la experiencia de la clínica antes de escribir por WhatsApp o agendar su evaluación.</p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Ver reseñas en Google Maps</Link>
-              <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">Agendar por WhatsApp</Link>
-            </div>
-            <div className="mt-7 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Confianza</p>
-                <p className="mt-3 text-sm leading-7 text-ink">Las reseñas ayudan a validar la experiencia, la claridad en el trato y la sensación general de atención.</p>
-              </div>
-              <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ubicación</p>
-                <p className="mt-3 text-sm leading-7 text-ink">El acceso directo abre la ficha de la clínica para revisar reseñas, ubicación y navegación en un mismo lugar.</p>
-              </div>
-              <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Decisión</p>
-                <p className="mt-3 text-sm leading-7 text-ink">Ubicamos este acceso en una zona visible para reforzar la decisión de agendar sin quitar protagonismo al CTA principal.</p>
+
+              <div className="rounded-[1.8rem] border border-black/10 bg-[#f7f2eb] p-3 shadow-card sm:p-4">
+                <div className="rounded-[1.35rem] border border-black/10 bg-white px-4 py-4 shadow-card">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google Maps</p>
+                      <h4 className="mt-2 text-base font-medium leading-6 text-ink sm:text-lg">Clínica de Ortodoncia, Dr. Ramiro Cedeño Garcia (Orthoclinix)</h4>
+                      <p className="mt-2 text-sm leading-6 text-slate">Edificio Baleares #5, Vía Argentina, El Cangrejo, Ciudad de Panamá.</p>
+                    </div>
+                    <div className="rounded-full border border-black/10 bg-[#fbf8f4] px-4 py-2 text-sm font-medium text-navy">5.0 ★</div>
+                  </div>
+                </div>
+                <div className="mt-4 overflow-hidden rounded-[1.5rem] border border-black/10 bg-white shadow-card">
+                  <iframe
+                    title="Google Maps Orthoclinix"
+                    src="https://www.google.com/maps?q=Clinica+de+Ortodoncia,+Dr.+Ramiro+Cede%C3%B1o+Garcia+(Orthoclinix),+Via+Argentina,+Panama&z=17&hl=es&output=embed"
+                    className="h-[360px] w-full sm:h-[430px]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-[1.35rem] border border-black/10 bg-white px-4 py-4 shadow-card">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ver ficha</p>
+                    <p className="mt-2 text-sm leading-6 text-ink">Desde aquí pueden entrar a reseñas, ubicación y navegación de la clínica.</p>
+                  </div>
+                  <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5">Ir a Google Maps</Link>
+                </div>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <EditorialVideo id="video-02" title="Historias que ayudan a entender mejor la experiencia Orthoclinix." text="Este segundo video puede reforzar la decisión de agendar con resultados, testimonios o una pieza breve bien producida. También se abre completo para que se vea mejor en celular." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed onOpen={setActiveVideo} />
+      <EditorialVideo id="video-02" title="Así es la evaluación inicial y el estudio diagnóstico de tu caso." text="Aquí se ve parte del proceso previo al tratamiento: radiografías, fotos intra y extraorales y revisión clínica para entender tu caso con más claridad desde la primera cita." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed onOpen={setActiveVideo} />
 
       <section id="proceso" className="py-16 sm:py-24">
         <div className="container-shell grid gap-10 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
