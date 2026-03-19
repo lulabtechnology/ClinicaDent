@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { siteConfig, whatsappLink } from '@/lib/site';
 
 const navItems = [
@@ -146,13 +146,20 @@ function FullBleedSection({
   );
 }
 
+type VideoModalState = {
+  title: string;
+  src: string;
+  poster: string;
+};
+
 function EditorialVideo({
   id,
   title,
   text,
   src,
   poster,
-  reversed = false
+  reversed = false,
+  onOpen
 }: {
   id: string;
   title: string;
@@ -160,21 +167,8 @@ function EditorialVideo({
   src: string;
   poster: string;
   reversed?: boolean;
+  onOpen: (video: VideoModalState) => void;
 }) {
-  const ref = useRef<HTMLVideoElement | null>(null);
-  const [playing, setPlaying] = useState(false);
-
-  async function toggleVideo() {
-    if (!ref.current) return;
-    if (ref.current.paused) {
-      await ref.current.play();
-      setPlaying(true);
-    } else {
-      ref.current.pause();
-      setPlaying(false);
-    }
-  }
-
   return (
     <section id={id} className="py-20 sm:py-28">
       <div className="container-shell">
@@ -183,21 +177,39 @@ function EditorialVideo({
             <SectionKicker dark>ORTHOCLINIX</SectionKicker>
             <h2 className="section-title mt-6">{title}</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">{text}</p>
-            <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">
-              Agendar por WhatsApp
-            </Link>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => onOpen({ title, src, poster })}
+                className="inline-flex items-center justify-center rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5"
+              >
+                Ver video completo
+              </button>
+              <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white/80 px-6 py-3.5 text-sm font-medium text-navy backdrop-blur transition hover:-translate-y-0.5">
+                Agendar por WhatsApp
+              </Link>
+            </div>
           </Reveal>
 
           <Reveal delay={0.08} className={reversed ? 'xl:order-1' : ''}>
-            <div className="relative overflow-hidden rounded-[2.2rem] bg-[#ece7e0] shadow-soft">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[2.2rem]">
-                <video ref={ref} className="h-full w-full object-cover" playsInline muted loop preload="metadata" poster={poster} src={src} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10" />
-                <button type="button" onClick={toggleVideo} aria-label={playing ? 'Pausar video' : 'Reproducir video'} className="absolute bottom-5 right-5 grid h-16 w-16 place-items-center rounded-full border border-white/70 bg-white/20 text-white backdrop-blur-xl transition hover:scale-105 sm:bottom-6 sm:right-6 sm:h-20 sm:w-20">
-                  <span className="ml-1 text-xl sm:text-2xl">{playing ? '❚❚' : '▶'}</span>
-                </button>
+            <button
+              type="button"
+              onClick={() => onOpen({ title, src, poster })}
+              aria-label={`Ver video completo: ${title}`}
+              className="group relative block w-full overflow-hidden rounded-[2.2rem] bg-[#ece7e0] shadow-soft text-left"
+            >
+              <div className="relative aspect-[10/13] overflow-hidden rounded-[2.2rem] sm:aspect-[4/5]">
+                <Image src={poster} alt={`Portada de video: ${title}`} fill sizes="(min-width: 1280px) 48vw, 100vw" className="object-contain p-3 sm:p-4" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-white/12" />
+                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 rounded-[1.4rem] border border-white/45 bg-[rgba(15,21,55,0.28)] px-4 py-3 text-white backdrop-blur-xl sm:inset-x-5 sm:bottom-5 sm:px-5 sm:py-4">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-white/72">Video completo</p>
+                    <p className="mt-1 text-sm font-medium leading-6 text-white sm:text-base">Toca para verlo sin recortes</p>
+                  </div>
+                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border border-white/60 bg-white/16 text-2xl transition group-hover:scale-105">▶</span>
+                </div>
               </div>
-            </div>
+            </button>
           </Reveal>
         </div>
       </div>
@@ -209,6 +221,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
+  const [activeVideo, setActiveVideo] = useState<VideoModalState | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -218,11 +231,20 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    document.body.style.overflow = menuOpen || activeVideo ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [menuOpen]);
+  }, [menuOpen, activeVideo]);
+
+  useEffect(() => {
+    if (!activeVideo) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActiveVideo(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeVideo]);
 
   return (
     <main className="relative overflow-x-clip">
@@ -271,6 +293,25 @@ export default function Home() {
         </nav>
         <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-navy px-5 py-3.5 text-sm font-medium text-white">Agendar por WhatsApp</Link>
       </aside>
+
+      {activeVideo && (
+        <div className="fixed inset-0 z-[90] bg-[#0b1028]/82 p-3 backdrop-blur-md sm:p-5" onClick={() => setActiveVideo(null)}>
+          <div className="mx-auto flex h-full w-full max-w-[1320px] items-center justify-center">
+            <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/15 bg-[#0f1537] shadow-soft" onClick={(event) => event.stopPropagation()}>
+              <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 text-white sm:px-6 sm:py-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-white/60">Video completo</p>
+                  <h3 className="mt-1 text-sm font-medium text-white sm:text-base">{activeVideo.title}</h3>
+                </div>
+                <button type="button" onClick={() => setActiveVideo(null)} className="grid h-11 w-11 place-items-center rounded-full border border-white/18 bg-white/10 text-lg text-white transition hover:bg-white/16" aria-label="Cerrar video">✕</button>
+              </div>
+              <div className="relative flex max-h-[calc(100svh-7rem)] min-h-[60svh] items-center justify-center bg-black">
+                <video key={activeVideo.src} className="max-h-[calc(100svh-7rem)] w-full object-contain" controls autoPlay playsInline preload="metadata" poster={activeVideo.poster} src={activeVideo.src} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section id="inicio" className="relative isolate min-h-[100svh] overflow-hidden bg-[#f6f1ea]">
         <div className="absolute inset-0 hidden md:block">
@@ -381,7 +422,7 @@ export default function Home() {
         </div>
       </section>
 
-      <EditorialVideo id="video-01" title="Conoce mejor la clínica, la forma de atención y el cuidado puesto en cada detalle." text="Aquí puede ir un recorrido breve, una explicación clínica o una pieza audiovisual que ayude a transmitir confianza y claridad." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" />
+      <EditorialVideo id="video-01" title="Conoce mejor la clínica, la forma de atención y el cuidado puesto en cada detalle." text="Aquí puede ir un recorrido breve, una explicación clínica o una pieza audiovisual que ayude a transmitir confianza y claridad. Al tocar la portada, el video se abre completo y sin recortes dentro de la landing." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" onOpen={setActiveVideo} />
       <section className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
           <Reveal className="max-w-xl xl:pb-8">
@@ -403,7 +444,7 @@ export default function Home() {
         </div>
       </section>
 
-      <EditorialVideo id="video-02" title="Historias que ayudan a entender mejor la experiencia Orthoclinix." text="Este segundo video puede reforzar la decisión de agendar con resultados, testimonios o una pieza breve bien producida." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed />
+      <EditorialVideo id="video-02" title="Historias que ayudan a entender mejor la experiencia Orthoclinix." text="Este segundo video puede reforzar la decisión de agendar con resultados, testimonios o una pieza breve bien producida. También se abre completo para que se vea mejor en celular." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed onOpen={setActiveVideo} />
 
       <section id="proceso" className="py-16 sm:py-24">
         <div className="container-shell grid gap-10 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
