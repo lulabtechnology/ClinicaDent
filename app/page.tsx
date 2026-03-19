@@ -69,12 +69,6 @@ const faqItems = [
   ['¿Cómo agendo por WhatsApp?', 'Solo debes tocar cualquiera de los botones de WhatsApp en la landing. El enlace ya abre con un mensaje precargado para solicitar tu evaluación.']
 ] as const;
 
-const gallery = [
-  ['/assets/fullscreen/fullscreen-01.webp', 'Ambiente premium de clínica dental', 'lg:col-span-7 lg:row-span-2 min-h-[460px]'],
-  ['/assets/gallery/gallery-03.webp', 'Consulta clínica en Orthoclinix', 'lg:col-span-5 min-h-[260px]'],
-  ['/assets/gallery/gallery-07.webp', 'Atención odontológica en proceso', 'lg:col-span-5 min-h-[300px]'],
-  ['/assets/hero/hero-desktop.webp', 'Composición abstracta editorial', 'lg:col-span-7 min-h-[340px]']
-] as const;
 
 function Reveal({ children, className = '', delay = 0, y = 28 }: { children: React.ReactNode; className?: string; delay?: number; y?: number }) {
   return (
@@ -95,17 +89,16 @@ function SectionKicker({ children, dark = false }: { children: React.ReactNode; 
 }
 
 function BrandLogo({ dark = false, compact = false }: { dark?: boolean; compact?: boolean }) {
-  const logoSrc = dark ? siteConfig.logoDark : siteConfig.logoDark;
+  const logoSrc = dark ? siteConfig.logoDark : siteConfig.logoLight;
 
   return (
     <div className={`relative ${compact ? 'h-11 w-[174px] sm:h-12 sm:w-[188px]' : 'h-12 w-[188px] sm:h-14 sm:w-[220px]'}`}>
-      <Image
+      <img
         src={logoSrc}
-        alt={`${siteConfig.name} logo`}
-        fill
-        sizes={compact ? '(min-width: 640px) 188px, 174px' : '(min-width: 640px) 220px, 188px'}
-        className='object-contain object-left'
-        priority
+        alt={siteConfig.name}
+        className='h-full w-full object-contain object-left'
+        loading='eager'
+        decoding='async'
       />
     </div>
   );
@@ -311,10 +304,22 @@ export default function Home() {
                   Ver evaluación
                 </a>
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.38 }} className="mt-8 grid max-w-[640px] grid-cols-3 gap-3 sm:mt-10 sm:gap-4">
-                <div className="rounded-[1.35rem] border border-black/10 bg-white/78 p-4 shadow-card backdrop-blur-md sm:rounded-[1.6rem] sm:p-5"><div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Experiencia</div><div className="mt-2 font-serif text-[2.2rem] text-navy sm:text-4xl">28+</div></div>
-                <div className="rounded-[1.35rem] border border-black/10 bg-white/78 p-4 shadow-card backdrop-blur-md sm:rounded-[1.6rem] sm:p-5"><div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Casos</div><div className="mt-2 font-serif text-[2.2rem] text-navy sm:text-4xl">2000+</div></div>
-                <div className="rounded-[1.35rem] border border-black/10 bg-white/78 p-4 shadow-card backdrop-blur-md sm:rounded-[1.6rem] sm:p-5"><div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Reseñas</div><div className="mt-2 font-serif text-[2.2rem] text-navy sm:text-4xl">33 × 5★</div></div>
+              <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.38 }} className="mt-8 grid max-w-[660px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4">
+                <div className="min-h-[132px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Experiencia</div>
+                  <div className="mt-3 font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">28+</div>
+                </div>
+                <div className="min-h-[132px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Casos</div>
+                  <div className="mt-3 font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">2000+</div>
+                </div>
+                <div className="col-span-2 min-h-[116px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md sm:col-span-1 sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Reseñas</div>
+                  <div className="mt-3 flex items-end justify-between gap-4 sm:block">
+                    <span className="font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">33</span>
+                    <span className="text-sm font-medium text-navy sm:mt-2 sm:block sm:text-base">5★ promedio</span>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -340,7 +345,7 @@ export default function Home() {
       <section id="experiencia" className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.06fr_0.94fr] xl:items-end">
           <Reveal className="relative min-h-[540px] overflow-hidden rounded-[2.25rem] bg-[#e7e0d8] shadow-soft sm:min-h-[660px]">
-            <Image src="/assets/gallery/gallery-03.webp" alt="Ambiente editorial de Orthoclinix" fill sizes="(min-width: 1280px) 52vw, 100vw" className="object-cover object-top" />
+            <Image src="/assets/gallery/gallery-01.webp" alt="Ambiente editorial de Orthoclinix" fill sizes="(min-width: 1280px) 52vw, 100vw" className="object-cover object-top" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10" />
           </Reveal>
           <Reveal delay={0.08} className="max-w-xl xl:pb-12">
@@ -361,7 +366,7 @@ export default function Home() {
             <SectionKicker dark>Servicios principales</SectionKicker>
             <h2 className="section-title mt-6">Tratamientos pensados para función, estética y salud a largo plazo.</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">Ortodoncia tradicional y estética, junto con tratamientos complementarios que refuerzan una atención integral.</p>
-            <div className="mt-8 overflow-hidden rounded-[2rem] bg-[#e7e1d9] shadow-card"><div className="relative aspect-[4/5]"><Image src="/assets/gallery/gallery-04.webp" alt="Escena clínica editorial" fill sizes="(min-width: 1280px) 28vw, 100vw" className="object-cover" /></div></div>
+            <div className="mt-8 overflow-hidden rounded-[2rem] bg-[#e7e1d9] shadow-card"><div className="relative aspect-[4/5]"><Image src="/assets/gallery/gallery-02.webp" alt="Escena clínica editorial" fill sizes="(min-width: 1280px) 28vw, 100vw" className="object-cover" /></div></div>
           </Reveal>
 
           <div className="space-y-1 border-t border-black/10">
@@ -376,27 +381,7 @@ export default function Home() {
         </div>
       </section>
 
-      <EditorialVideo id="video-01" title="Conoce mejor la clínica, la forma de atención y el cuidado puesto en cada detalle." text="Aquí puedes mostrar un recorrido breve, una explicación clínica o una pieza audiovisual que refuerce confianza, calidez y profesionalismo." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" />
-
-      <section className="py-16 sm:py-24">
-        <div className="container-shell">
-          <Reveal className="max-w-3xl">
-            <SectionKicker dark>Imágenes seleccionadas</SectionKicker>
-            <h2 className="section-title mt-6">Una selección visual pensada para reforzar confianza y mostrar el estilo de la clínica.</h2>
-          </Reveal>
-          <div className="mt-10 grid auto-rows-fr gap-4 lg:grid-cols-12">
-            {gallery.map((item, index) => (
-              <Reveal key={item[0]} delay={index * 0.05} className={item[2]}>
-                <div className="relative h-full overflow-hidden rounded-[2rem] bg-[#ebe5dd] shadow-card">
-                  <Image src={item[0]} alt={item[1]} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/8" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <EditorialVideo id="video-01" title="Conoce mejor la clínica, la forma de atención y el cuidado puesto en cada detalle." text="Aquí puede ir un recorrido breve, una explicación clínica o una pieza audiovisual que ayude a transmitir confianza y claridad." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" />
       <section className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
           <Reveal className="max-w-xl xl:pb-8">
@@ -412,13 +397,13 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.08} className="relative min-h-[540px] overflow-hidden rounded-[2.25rem] bg-[#e8e2da] shadow-soft sm:min-h-[660px]">
-            <Image src="/assets/fullscreen/fullscreen-01.webp" alt="Orthoclinix atención clínica premium" fill sizes="(min-width: 1280px) 48vw, 100vw" className="object-cover" />
+            <Image src="/assets/gallery/gallery-03.webp" alt="Orthoclinix atención clínica premium" fill sizes="(min-width: 1280px) 48vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10" />
           </Reveal>
         </div>
       </section>
 
-      <EditorialVideo id="video-02" title="Historias que ayudan a entender mejor la experiencia Orthoclinix." text="Este segundo video puede reforzar confianza con testimonios, resultados o una pieza breve que acompañe mejor la decisión de agendar." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed />
+      <EditorialVideo id="video-02" title="Historias que ayudan a entender mejor la experiencia Orthoclinix." text="Este segundo video puede reforzar la decisión de agendar con resultados, testimonios o una pieza breve bien producida." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed />
 
       <section id="proceso" className="py-16 sm:py-24">
         <div className="container-shell grid gap-10 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
@@ -517,7 +502,7 @@ export default function Home() {
               <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex rounded-full bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">Quiero agendar por WhatsApp</Link>
             </Reveal>
             <Reveal delay={0.08} className="relative min-h-[340px] xl:min-h-full">
-              <Image src="/assets/gallery/gallery-07.webp" alt="Orthoclinix cierre visual" fill sizes="(min-width: 1280px) 50vw, 100vw" className="object-cover opacity-80" />
+              <Image src="/assets/gallery/gallery-04.webp" alt="Orthoclinix cierre visual" fill sizes="(min-width: 1280px) 50vw, 100vw" className="object-cover opacity-80" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#0f1537] via-[#0f1537]/30 to-transparent xl:bg-gradient-to-l xl:from-transparent xl:via-[#0f1537]/20 xl:to-[#0f1537]/10" />
             </Reveal>
           </div>

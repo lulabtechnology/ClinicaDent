@@ -8,8 +8,8 @@ export const siteConfig = {
   address: 'Edificio Baleares #5, Clínica de Ortodoncia y Odontología General, Vía Argentina, El Cangrejo',
   hours: '10:30 am a 12:00 pm y de 2:00 pm a 6:00 pm',
   city: 'Ciudad de Panamá',
-  logoLight: '/assets/brand/logo-light.svg',
-  logoDark: '/assets/brand/logo-dark.svg'
+  logoLight: '/assets/brand/logo-header.svg',
+  logoDark: '/assets/brand/logo-footer.svg'
 };
 
 export const whatsappMessage = 'Hola, vi la landing de Orthoclinix y quiero agendar una evaluación.';
