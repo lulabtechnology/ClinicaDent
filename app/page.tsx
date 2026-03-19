@@ -24,8 +24,8 @@ const services = [
 ] as const;
 
 const differentiators = [
-  'Más de 28 años de experiencia en ortodoncia con visión clínica integral.',
-  'Siempre te atiende el mismo doctor o doctora durante tu proceso.',
+  'Más de 29 años de experiencia en ortodoncia con visión clínica integral.',
+  'Siempre te atenderá el mismo ortodoncista durante tu tratamiento.',
   'Tecnología de vanguardia para diagnósticos inmediatos y de calidad.',
   'Atención cálida, cercana y personalizada desde la primera cita.',
   'Compromiso real con resultados funcionales, estéticos y saludables.',
@@ -335,7 +335,7 @@ export default function Home() {
                 Una sonrisa bien cuidada cambia toda la experiencia.
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.18 }} className="mt-4 max-w-[620px] text-[15px] leading-7 text-slate sm:text-lg sm:leading-8">
-                Más de 28 años de experiencia, atención cálida y un plan claro desde la evaluación hasta el resultado final.
+                Más de 29 años de experiencia, atención cálida y un plan claro desde la evaluación hasta el resultado final.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.28 }} className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">
@@ -348,19 +348,20 @@ export default function Home() {
               <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.38 }} className="mt-8 grid max-w-[660px] grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-4">
                 <div className="min-h-[132px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
                   <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Experiencia</div>
-                  <div className="mt-3 font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">28+</div>
+                  <div className="mt-3 font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">29+</div>
                 </div>
                 <div className="min-h-[132px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
                   <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Casos</div>
                   <div className="mt-3 font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">2000+</div>
                 </div>
-                <div className="col-span-2 min-h-[116px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md sm:col-span-1 sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
-                  <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Reseñas</div>
+                <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="col-span-2 min-h-[116px] rounded-[1.35rem] border border-black/10 bg-white/82 p-4 shadow-card backdrop-blur-md transition hover:-translate-y-0.5 sm:col-span-1 sm:min-h-0 sm:rounded-[1.6rem] sm:p-5">
+                  <div className="text-[10px] uppercase tracking-[0.22em] text-slate sm:text-[11px]">Reseñas en Google</div>
                   <div className="mt-3 flex items-end justify-between gap-4 sm:block">
                     <span className="font-serif text-[2.3rem] leading-none text-navy sm:text-4xl">33</span>
                     <span className="text-sm font-medium text-navy sm:mt-2 sm:block sm:text-base">5★ promedio</span>
                   </div>
-                </div>
+                  <span className="mt-3 inline-flex text-xs font-medium text-teal">Abrir Google Maps →</span>
+                </Link>
               </motion.div>
             </div>
           </div>
@@ -368,7 +369,7 @@ export default function Home() {
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }} className="absolute bottom-5 right-5 hidden max-w-[330px] rounded-[1.8rem] border border-white/50 bg-white/74 p-5 text-navy shadow-soft backdrop-blur-xl lg:block xl:bottom-8 xl:right-8 xl:p-6">
           <p className="text-[11px] uppercase tracking-[0.22em] text-slate">Atención personalizada</p>
-          <p className="mt-3 text-lg leading-7 text-ink">Siempre te atiende el mismo doctor o doctora, con diagnósticos claros y un tratamiento pensado para ti.</p>
+          <p className="mt-3 text-lg leading-7 text-ink">Siempre te atenderá el mismo ortodoncista durante tu tratamiento, con diagnósticos claros y una guía constante de principio a fin.</p>
         </motion.div>
       </section>
 
@@ -394,7 +395,15 @@ export default function Home() {
             <h2 className="section-title mt-6">Ortodoncia con trato humano, visión clínica integral y un ambiente que transmite calma.</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">Aquí se trabaja la sonrisa, la mordida y la salud dental integral con tecnología de vanguardia, atención cercana y una explicación clara en cada etapa.</p>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">El objetivo no es solo alinear dientes, sino acompañar todo el proceso con consistencia clínica y una experiencia cómoda de principio a fin.</p>
-            <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Solicitar evaluación</Link>
+            <div className="mt-7 rounded-[1.85rem] border border-black/10 bg-white/80 p-5 shadow-card backdrop-blur sm:p-6">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-slate">Dirección clínica</p>
+              <h3 className="mt-3 font-serif text-[2rem] leading-[1] tracking-[-0.03em] text-navy sm:text-[2.4rem]">Dr. Ramiro Cedeño García</h3>
+              <p className="mt-3 text-base leading-8 text-slate">Ortodoncista con más de 29 años de experiencia, seguimiento cercano y una atención pensada para que el tratamiento se sienta claro, estable y personalizado.</p>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Solicitar evaluación</Link>
+              <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white/80 px-6 py-3.5 text-sm font-medium text-navy backdrop-blur transition hover:-translate-y-0.5">Ver reseñas en Google</Link>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -440,6 +449,64 @@ export default function Home() {
           <Reveal delay={0.08} className="relative min-h-[540px] overflow-hidden rounded-[2.25rem] bg-[#e8e2da] shadow-soft sm:min-h-[660px]">
             <Image src="/assets/gallery/gallery-03.webp" alt="Orthoclinix atención clínica premium" fill sizes="(min-width: 1280px) 48vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10" />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24">
+        <div className="container-shell grid gap-8 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
+          <Reveal className="max-w-xl xl:sticky xl:top-28">
+            <SectionKicker dark>Ortodoncia liderada por especialista</SectionKicker>
+            <h2 className="section-title mt-6">Conoce al Dr. Ramiro Cedeño García, al frente de Orthoclinix.</h2>
+            <p className="mt-5 text-base leading-8 text-slate sm:text-lg">Su enfoque combina experiencia clínica, seguimiento cercano y una visión integral para acompañarte desde la evaluación hasta el resultado final.</p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-[1.5rem] border border-black/10 bg-white/80 p-4 shadow-card">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Experiencia</p>
+                <p className="mt-3 font-serif text-[2.2rem] leading-none text-navy">29+</p>
+              </div>
+              <div className="rounded-[1.5rem] border border-black/10 bg-white/80 p-4 shadow-card">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Casos</p>
+                <p className="mt-3 font-serif text-[2.2rem] leading-none text-navy">2000+</p>
+              </div>
+              <div className="rounded-[1.5rem] border border-black/10 bg-white/80 p-4 shadow-card">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Atención</p>
+                <p className="mt-3 text-sm leading-6 text-ink">Siempre te atenderá el mismo ortodoncista durante tu tratamiento.</p>
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08} className="rounded-[2.2rem] border border-white/70 bg-white/[0.78] p-6 shadow-soft backdrop-blur sm:p-8">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <SectionKicker dark>Reseñas</SectionKicker>
+                <h3 className="mt-5 font-serif text-[2.2rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3rem]">Reseñas reales que puedes revisar directamente en Google Maps.</h3>
+              </div>
+              <div className="rounded-[1.6rem] border border-black/10 bg-[#f7f2eb] px-5 py-4 shadow-card">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google Maps</p>
+                <div className="mt-3 flex items-end gap-3">
+                  <span className="font-serif text-[3rem] leading-none text-navy">33</span>
+                  <span className="pb-1 text-sm font-medium text-navy">reseñas · 5★ promedio</span>
+                </div>
+              </div>
+            </div>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-slate sm:text-lg">Integramos un acceso directo para que pacientes nuevos puedan validar la experiencia de la clínica antes de escribir por WhatsApp o agendar su evaluación.</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Ver reseñas en Google Maps</Link>
+              <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">Agendar por WhatsApp</Link>
+            </div>
+            <div className="mt-7 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Confianza</p>
+                <p className="mt-3 text-sm leading-7 text-ink">Las reseñas ayudan a validar la experiencia, la claridad en el trato y la sensación general de atención.</p>
+              </div>
+              <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ubicación</p>
+                <p className="mt-3 text-sm leading-7 text-ink">El acceso directo abre la ficha de la clínica para revisar reseñas, ubicación y navegación en un mismo lugar.</p>
+              </div>
+              <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Decisión</p>
+                <p className="mt-3 text-sm leading-7 text-ink">Ubicamos este acceso en una zona visible para reforzar la decisión de agendar sin quitar protagonismo al CTA principal.</p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -555,7 +622,7 @@ export default function Home() {
           <div className="grid gap-8 border-t border-black/[0.08] pt-8 sm:grid-cols-2 xl:grid-cols-[1fr_0.8fr_0.8fr]">
             <div>
               <div className="flex items-center gap-3"><BrandLogo dark compact /></div>
-              <p className="mt-5 max-w-sm text-sm leading-7 text-slate sm:text-base">Clínica de Ortodoncia y Odontología General con atención cálida, personalizada y premium en {siteConfig.city}.</p>
+              <p className="mt-5 max-w-sm text-sm leading-7 text-slate sm:text-base">Clínica de Ortodoncia y Odontología General liderada por el Dr. Ramiro Cedeño García, con atención cálida, personalizada y premium en {siteConfig.city}.</p>
             </div>
             <div>
               <h3 className="text-[11px] uppercase tracking-[0.22em] text-slate">Contacto</h3>
