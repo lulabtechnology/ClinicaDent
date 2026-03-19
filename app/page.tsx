@@ -28,7 +28,8 @@ const differentiators = [
   'Siempre te atenderá el mismo ortodoncista durante tu tratamiento.',
   'Tecnología de vanguardia para diagnósticos inmediatos y de calidad.',
   'Atención cálida, cercana y personalizada desde la primera cita.',
-  'Compromiso real con resultados funcionales, estéticos y saludables.'
+  'Compromiso real con resultados funcionales, estéticos y saludables.',
+  'Ortodoncista certificado y miembro de la Sociedad Panameña de Ortodoncia.'
 ] as const;
 
 const processSteps = [
@@ -473,57 +474,82 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
-          <Reveal delay={0.08} className="rounded-[2.2rem] border border-white/70 bg-white/[0.82] p-5 shadow-soft backdrop-blur sm:p-7">
-            <div className="flex flex-wrap items-start justify-between gap-4 rounded-[1.6rem] border border-black/10 bg-[#fbf8f4] p-4 sm:p-5">
+          <Reveal delay={0.08} className="rounded-[2.2rem] border border-white/70 bg-white/[0.78] p-6 shadow-soft backdrop-blur sm:p-8">
+            <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
               <div>
                 <SectionKicker dark>Google Maps</SectionKicker>
-                <h3 className="mt-4 font-serif text-[2rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[2.6rem]">Reseñas visibles y acceso directo a la ficha de la clínica.</h3>
-                <p className="mt-4 max-w-2xl text-base leading-8 text-slate">Aquí queda integrado el acceso a Google Maps para que el paciente vea la ficha de Orthoclinix, abra las reseñas y ubique la clínica desde la misma landing.</p>
-              </div>
-              <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5">
-                Ver reseñas en Google
-              </Link>
-            </div>
-
-            <div className="mt-5 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-[1.45rem] border border-black/10 bg-white p-4 shadow-card">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google rating</p>
-                <p className="mt-3 font-serif text-[2.4rem] leading-none text-navy">5.0★</p>
-              </div>
-              <div className="rounded-[1.45rem] border border-black/10 bg-white p-4 shadow-card">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Reseñas</p>
-                <p className="mt-3 font-serif text-[2.4rem] leading-none text-navy">33</p>
-              </div>
-              <div className="rounded-[1.45rem] border border-black/10 bg-white p-4 shadow-card">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ubicación</p>
-                <p className="mt-3 text-sm leading-6 text-ink">Edificio Baleares #5, Vía Argentina, El Cangrejo.</p>
-              </div>
-            </div>
-
-            <div className="mt-5 overflow-hidden rounded-[1.8rem] border border-black/10 bg-[#f7f2eb] p-3 shadow-card sm:p-4">
-              <div className="flex flex-wrap items-center justify-between gap-3 rounded-[1.35rem] border border-black/10 bg-white px-4 py-4 shadow-card">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ficha de Google Maps</p>
-                  <h4 className="mt-2 text-base font-medium leading-6 text-ink sm:text-lg">Clínica de Ortodoncia, Dr. Ramiro Cedeño Garcia (Orthoclinix)</h4>
-                  <p className="mt-2 text-sm leading-6 text-slate">Abre la ficha, la ubicación y las reseñas desde este bloque.</p>
+                <h3 className="mt-5 font-serif text-[2.2rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3rem]">Reseñas visibles y acceso directo a Google Maps.</h3>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-slate sm:text-lg">Aquí el paciente puede abrir la ficha de Orthoclinix, ver ubicación y entrar a las reseñas desde un bloque más claro, limpio y confiable dentro de la landing.</p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Ver reseñas en Google Maps</Link>
+                  <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">Agendar por WhatsApp</Link>
                 </div>
-                <div className="rounded-full border border-black/10 bg-[#fbf8f4] px-4 py-2 text-sm font-medium text-navy">5.0 ★</div>
+                <div className="mt-7 grid gap-4 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Reseñas</p>
+                    <div className="mt-3 flex items-end gap-3">
+                      <span className="font-serif text-[2.7rem] leading-none text-navy">33</span>
+                      <span className="pb-1 text-sm font-medium text-navy">en Google</span>
+                    </div>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Promedio</p>
+                    <p className="mt-3 font-serif text-[2.7rem] leading-none text-navy">5.0★</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ficha</p>
+                    <p className="mt-3 text-sm leading-7 text-ink">Ubicación, reseñas y navegación directa desde Google Maps.</p>
+                  </div>
+                </div>
+                <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-[1.5rem] border border-black/10 bg-white p-5 shadow-card">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Lo que más valoran</p>
+                      <span className="rounded-full border border-black/10 bg-[#fbf8f4] px-3 py-1 text-xs font-medium text-navy">5.0 ★</span>
+                    </div>
+                    <p className="mt-4 font-serif text-[1.75rem] leading-[1.02] tracking-[-0.03em] text-navy">Trato y comunicación</p>
+                    <p className="mt-3 text-sm leading-7 text-slate">Valoración pública destacada por pacientes.</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-black/10 bg-white p-5 shadow-card">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Lo que más valoran</p>
+                      <span className="rounded-full border border-black/10 bg-[#fbf8f4] px-3 py-1 text-xs font-medium text-navy">5.0 ★</span>
+                    </div>
+                    <p className="mt-4 font-serif text-[1.75rem] leading-[1.02] tracking-[-0.03em] text-navy">Puntualidad</p>
+                    <p className="mt-3 text-sm leading-7 text-slate">Otra valoración pública que ayuda a reforzar la confianza antes de agendar.</p>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-4 overflow-hidden rounded-[1.5rem] border border-black/10 bg-white shadow-card">
-                <iframe
-                  title="Google Maps Orthoclinix"
-                  src="https://www.google.com/maps?q=Clinica+de+Ortodoncia,+Dr.+Ramiro+Cede%C3%B1o+Garcia+(Orthoclinix),+Via+Argentina,+Panama&z=17&hl=es&output=embed"
-                  className="h-[340px] w-full sm:h-[430px]"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full bg-navy px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5">Ver reseñas</Link>
-                <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-navy transition hover:-translate-y-0.5">Abrir ficha</Link>
-                <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-navy transition hover:-translate-y-0.5">Agendar por WhatsApp</Link>
+              <div className="rounded-[1.8rem] border border-black/10 bg-[#f7f2eb] p-3 shadow-card sm:p-4">
+                <div className="rounded-[1.35rem] border border-black/10 bg-white px-4 py-4 shadow-card">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google Maps</p>
+                      <h4 className="mt-2 text-base font-medium leading-6 text-ink sm:text-lg">Clínica de Ortodoncia, Dr. Ramiro Cedeño Garcia (Orthoclinix)</h4>
+                      <p className="mt-2 text-sm leading-6 text-slate">Edificio Baleares #5, Vía Argentina, El Cangrejo, Ciudad de Panamá.</p>
+                    </div>
+                    <div className="rounded-full border border-black/10 bg-[#fbf8f4] px-4 py-2 text-sm font-medium text-navy">5.0 ★</div>
+                  </div>
+                </div>
+                <div className="mt-4 overflow-hidden rounded-[1.5rem] border border-black/10 bg-white shadow-card">
+                  <iframe
+                    title="Google Maps Orthoclinix"
+                    src="https://www.google.com/maps?q=Clinica+de+Ortodoncia,+Dr.+Ramiro+Cede%C3%B1o+Garcia+(Orthoclinix),+Via+Argentina,+Panama&z=17&hl=es&output=embed"
+                    className="h-[360px] w-full sm:h-[430px]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+                <div className="mt-4 rounded-[1.35rem] border border-black/10 bg-white px-4 py-4 shadow-card">
+                  <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Abrir ficha</p>
+                      <p className="mt-2 text-sm leading-6 text-ink">Toca el botón para ver todas las reseñas, la ubicación exacta y cómo llegar en Google Maps.</p>
+                    </div>
+                    <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full bg-navy px-5 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5">Abrir ficha completa</Link>
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
