@@ -11,19 +11,20 @@
 html { scroll-behavior: smooth; }
 body {
   background:
-    radial-gradient(circle at top left, rgba(76, 193, 176, 0.12), transparent 28%),
-    radial-gradient(circle at 100% 15%, rgba(35, 38, 98, 0.10), transparent 32%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafa 58%, #eef8f5 100%);
+    radial-gradient(circle at top left, rgba(76, 193, 176, 0.06), transparent 28%),
+    radial-gradient(circle at 100% 15%, rgba(35, 38, 98, 0.05), transparent 32%),
+    linear-gradient(180deg, #f5f2ee 0%, #fbfaf7 28%, #ffffff 62%, #fbfdfc 100%);
   color: #171A22;
   overflow-x: hidden;
 }
 * { border-color: var(--border); }
-::selection { background: rgba(76, 193, 176, 0.24); }
+::selection { background: rgba(76, 193, 176, 0.22); }
 
 @layer utilities {
-  .container-shell { @apply mx-auto w-full max-w-[1220px] px-5 sm:px-6 lg:px-8; }
+  .container-shell { @apply mx-auto w-full max-w-[1240px] px-5 sm:px-6 lg:px-8; }
   .headline { font-family: var(--font-serif); @apply tracking-[-0.03em] text-4xl leading-[0.95] text-ink sm:text-5xl md:text-6xl lg:text-[4.5rem]; }
-  .section-title { font-family: var(--font-serif); @apply text-3xl leading-tight tracking-[-0.025em] text-ink sm:text-4xl lg:text-[3.25rem]; }
-  .eyebrow { @apply inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/75 px-4 py-2 text-[11px] font-semibold uppercase tracking-luxe text-navy backdrop-blur; }
-  .glass-panel { @apply border border-white/60 bg-white/[0.78] backdrop-blur-xl; }
+  .section-title { font-family: var(--font-serif); @apply text-3xl leading-[1.02] tracking-[-0.03em] text-ink sm:text-4xl lg:text-[3.45rem]; }
+  .hero-line { font-family: var(--font-serif); @apply text-[3.4rem] leading-[0.9] tracking-[-0.05em] sm:text-[4.7rem] lg:text-[6rem] xl:text-[7.2rem]; }
+  .eyebrow { @apply inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/74 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-navy backdrop-blur; }
+  .glass-panel { @apply border border-white/70 bg-white/[0.78] backdrop-blur-xl; }
 }
