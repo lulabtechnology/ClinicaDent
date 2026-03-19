@@ -398,7 +398,7 @@ export default function Home() {
             <div className="mt-7 rounded-[1.85rem] border border-black/10 bg-white/80 p-5 shadow-card backdrop-blur sm:p-6">
               <p className="text-[11px] uppercase tracking-[0.22em] text-slate">Dirección clínica</p>
               <h3 className="mt-3 font-serif text-[2rem] leading-[1] tracking-[-0.03em] text-navy sm:text-[2.4rem]">Dr. Ramiro Cedeño García</h3>
-              <p className="mt-3 text-base leading-8 text-slate">Ortodoncista con más de 29 años de experiencia, seguimiento cercano y una atención pensada para que el tratamiento se sienta claro, estable y personalizado.</p>
+              <p className="mt-3 text-base leading-8 text-slate">Ortodoncista con más de 29 años de experiencia brindando siempre seguimiento cercano y personalizado a tu tratamiento.</p>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Solicitar evaluación</Link>
@@ -454,7 +454,7 @@ export default function Home() {
       </section>
 
       <section className="py-16 sm:py-24">
-        <div className="container-shell grid gap-8 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
+        <div className="container-shell grid gap-8 xl:grid-cols-[0.98fr_1.02fr] xl:items-start">
           <Reveal className="max-w-xl xl:sticky xl:top-28">
             <SectionKicker dark>Ortodoncia liderada por especialista</SectionKicker>
             <h2 className="section-title mt-6">Conoce al Dr. Ramiro Cedeño García, al frente de Orthoclinix.</h2>
@@ -479,24 +479,27 @@ export default function Home() {
               <div>
                 <SectionKicker dark>Google Maps</SectionKicker>
                 <h3 className="mt-5 font-serif text-[2.2rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3rem]">Reseñas reales y ficha visible de la clínica, integradas de forma directa.</h3>
-                <p className="mt-6 max-w-2xl text-base leading-8 text-slate sm:text-lg">Consulta la ficha de Orthoclinix en Google Maps para ver la ubicación, abrir las reseñas y llegar directo a la clínica desde la misma landing.</p>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-slate sm:text-lg">Abre la ficha de Orthoclinix en Google Maps para revisar reseñas, confirmar la ubicación y entrar directo a la clínica desde esta misma landing.</p>
                 <div className="mt-7 flex flex-wrap gap-3">
                   <Link href={siteConfig.googleReviewsLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Abrir Google Maps</Link>
                   <Link href={whatsappLink} target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">Agendar por WhatsApp</Link>
                 </div>
-                <div className="mt-7 grid gap-4 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
+                <div className="mt-7 grid gap-4 sm:grid-cols-2">
                   <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Reseñas en Google</p>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Google rating</p>
+                    <div className="mt-3 flex items-end gap-3">
+                      <span className="font-serif text-[2.7rem] leading-none text-navy">5.0★</span>
+                      <span className="pb-1 text-sm font-medium text-navy">en Google Maps</span>
+                    </div>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Reseñas visibles</p>
                     <div className="mt-3 flex items-end gap-3">
                       <span className="font-serif text-[2.7rem] leading-none text-navy">33</span>
                       <span className="pb-1 text-sm font-medium text-navy">reseñas</span>
                     </div>
                   </div>
-                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Promedio</p>
-                    <p className="mt-3 font-serif text-[2.7rem] leading-none text-navy">5.0★</p>
-                  </div>
-                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5">
+                  <div className="rounded-[1.5rem] border border-black/10 bg-[#fbf8f4] p-5 sm:col-span-2">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-slate">Ubicación</p>
                     <p className="mt-3 text-sm leading-7 text-ink">Edificio Baleares #5, Vía Argentina, El Cangrejo, Ciudad de Panamá.</p>
                   </div>
