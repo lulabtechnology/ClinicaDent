@@ -28,3 +28,14 @@ body {
   .eyebrow-dark { @apply inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/90 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-navy shadow-card; }
   .glass-panel { @apply border border-white/70 bg-white/[0.78] backdrop-blur-xl; }
 }
+
+@layer components {
+  .shadow-soft { box-shadow: 0 30px 90px rgba(15, 21, 55, 0.14); }
+  .shadow-card { box-shadow: 0 16px 50px rgba(15, 21, 55, 0.08); }
+  .text-ink { color: #171A22; }
+  .text-slate { color: rgba(23,26,34,0.72); }
+  .text-navy { color: #232662; }
+  .bg-navy { background-color: #232662; }
+  .text-teal { color: #4CC1B0; }
+  .border-line { border-color: rgba(23,26,34,0.08); }
+}
