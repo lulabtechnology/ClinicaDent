@@ -83,29 +83,64 @@ function Reveal({ children, className = '', delay = 0, y = 28 }: { children: Rea
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: 0.75, ease: [0.21, 1.02, 0.35, 1], delay }}
+      transition={{ duration: 0.8, ease: [0.21, 1.02, 0.35, 1], delay }}
     >
       {children}
     </motion.div>
   );
 }
 
-function SectionKicker({ children }: { children: React.ReactNode }) {
-  return <span className="eyebrow">{children}</span>;
+function SectionKicker({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+  return <span className={dark ? 'eyebrow-dark' : 'eyebrow'}>{children}</span>;
 }
 
-function LogoMark() {
+function LogoMark({ dark = false }: { dark?: boolean }) {
   return (
     <>
-      <div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-white/70 bg-white/90 shadow-card backdrop-blur">
+      <div className={`relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border shadow-card backdrop-blur ${dark ? 'border-black/10 bg-white/90' : 'border-white/70 bg-white/90'}`}>
         <div className="absolute inset-[7px] rounded-[18px] border border-[#232662]/10" />
         <span className="relative font-serif text-xl font-semibold tracking-[-0.03em] text-navy">O</span>
       </div>
       <div className="hidden sm:block">
-        <div className="font-serif text-2xl leading-none tracking-[0.08em] text-white">ORTHOCLINIX</div>
-        <div className="mt-1 text-[10px] uppercase tracking-[0.28em] text-white/70">Ortodoncia premium</div>
+        <div className={`font-serif text-2xl leading-none tracking-[0.08em] ${dark ? 'text-navy' : 'text-white'}`}>ORTHOCLINIX</div>
+        <div className={`mt-1 text-[10px] uppercase tracking-[0.28em] ${dark ? 'text-slate' : 'text-white/70'}`}>Ortodoncia premium</div>
       </div>
     </>
+  );
+}
+
+function FullBleedSection({
+  kicker,
+  title,
+  text,
+  image,
+  alt,
+  align = 'left'
+}: {
+  kicker: string;
+  title: string;
+  text: string;
+  image: string;
+  alt: string;
+  align?: 'left' | 'right';
+}) {
+  return (
+    <section className="relative isolate min-h-[92svh] overflow-hidden">
+      <div className="absolute inset-0">
+        <Image src={image} alt={alt} fill sizes="100vw" className="object-cover" />
+      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,12,24,0.18)_0%,rgba(8,12,24,0.28)_32%,rgba(8,12,24,0.66)_100%)]" />
+      <div className={`relative mx-auto flex min-h-[92svh] max-w-[1360px] items-end px-5 py-12 sm:px-6 sm:py-16 lg:px-8 ${align === 'right' ? 'justify-end' : 'justify-start'}`}>
+        <Reveal className="max-w-[620px] rounded-[2rem] border border-white/15 bg-white/10 p-7 text-white shadow-soft backdrop-blur-xl sm:p-9 lg:p-11">
+          <SectionKicker>{kicker}</SectionKicker>
+          <h2 className="mt-6 font-serif text-[2.8rem] leading-[0.92] tracking-[-0.05em] text-white sm:text-[4rem] lg:text-[5rem]">{title}</h2>
+          <p className="mt-6 max-w-[56ch] text-base leading-8 text-white/82 sm:text-lg">{text}</p>
+          <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex rounded-full bg-white px-6 py-3.5 text-sm font-medium text-navy transition hover:-translate-y-0.5">
+            Agendar por WhatsApp
+          </Link>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -143,7 +178,7 @@ function EditorialVideo({
       <div className="container-shell">
         <div className={`grid gap-7 xl:items-end ${reversed ? 'xl:grid-cols-[1.04fr_0.96fr]' : 'xl:grid-cols-[0.96fr_1.04fr]'}`}>
           <Reveal className={reversed ? 'xl:order-2 max-w-xl pb-2' : 'max-w-xl pb-2'}>
-            <SectionKicker>ORTHOCLINIX</SectionKicker>
+            <SectionKicker dark>ORTHOCLINIX</SectionKicker>
             <h2 className="section-title mt-6">{title}</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">{text}</p>
             <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">
@@ -152,10 +187,10 @@ function EditorialVideo({
           </Reveal>
 
           <Reveal delay={0.08} className={reversed ? 'xl:order-1' : ''}>
-            <div className="relative overflow-hidden rounded-[2rem] bg-[#ece7e0] shadow-soft">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem]">
+            <div className="relative overflow-hidden rounded-[2.2rem] bg-[#ece7e0] shadow-soft">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[2.2rem]">
                 <video ref={ref} className="h-full w-full object-cover" playsInline muted loop preload="metadata" poster={poster} src={src} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10" />
                 <button type="button" onClick={toggleVideo} aria-label={playing ? 'Pausar video' : 'Reproducir video'} className="absolute bottom-5 right-5 grid h-16 w-16 place-items-center rounded-full border border-white/70 bg-white/20 text-white backdrop-blur-xl transition hover:scale-105 sm:bottom-6 sm:right-6 sm:h-20 sm:w-20">
                   <span className="ml-1 text-xl sm:text-2xl">{playing ? '❚❚' : '▶'}</span>
                 </button>
@@ -197,7 +232,7 @@ export default function Home() {
 
           <nav className="hidden items-center gap-7 lg:flex">
             {navItems.map((item) => (
-              <a key={item[1]} href={item[1]} className={`text-sm transition ${scrolled ? 'text-slate hover:text-navy' : 'text-white/80 hover:text-white'}`}>
+              <a key={item[1]} href={item[1]} className={`text-sm transition ${scrolled ? 'text-slate hover:text-navy' : 'text-white/82 hover:text-white'}`}>
                 {item[0]}
               </a>
             ))}
@@ -222,7 +257,7 @@ export default function Home() {
       <div className={`fixed inset-0 z-[60] bg-[#101327]/40 backdrop-blur-sm transition ${menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`} onClick={() => setMenuOpen(false)} />
       <aside className={`fixed right-0 top-0 z-[70] h-full w-[88vw] max-w-sm border-l border-white/60 bg-[#faf7f2]/95 p-6 shadow-soft backdrop-blur-2xl transition-transform duration-300 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3"><div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-white/70 bg-white/90 shadow-card"><div className="absolute inset-[7px] rounded-[18px] border border-[#232662]/10" /><span className="relative font-serif text-xl font-semibold tracking-[-0.03em] text-navy">O</span></div><div><div className="font-serif text-2xl leading-none tracking-[0.08em] text-navy">ORTHOCLINIX</div><div className="mt-1 text-[10px] uppercase tracking-[0.28em] text-slate">Ortodoncia premium</div></div></div>
+          <div className="flex items-center gap-3"><LogoMark dark /></div>
           <button type="button" onClick={() => setMenuOpen(false)} className="grid h-10 w-10 place-items-center rounded-full border border-black/10 text-navy" aria-label="Cerrar menú">✕</button>
         </div>
         <nav className="mt-10 space-y-2">
@@ -242,19 +277,22 @@ export default function Home() {
         <div className="absolute inset-0 md:hidden">
           <Image src="/assets/hero/hero-mobile.webp" alt="ORTHOCLINIX hero mobile" fill priority sizes="100vw" className="object-cover" />
         </div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,11,23,0.78)_0%,rgba(7,11,23,0.54)_34%,rgba(7,11,23,0.18)_68%,rgba(7,11,23,0.08)_100%)] md:bg-[linear-gradient(90deg,rgba(7,11,23,0.74)_0%,rgba(7,11,23,0.52)_33%,rgba(7,11,23,0.22)_65%,rgba(7,11,23,0.06)_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/5" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,11,23,0.86)_0%,rgba(7,11,23,0.62)_34%,rgba(7,11,23,0.18)_70%,rgba(7,11,23,0.08)_100%)] md:bg-[linear-gradient(90deg,rgba(7,11,23,0.86)_0%,rgba(7,11,23,0.58)_36%,rgba(7,11,23,0.16)_70%,rgba(7,11,23,0.06)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10" />
+        <div className="absolute -left-20 top-24 h-80 w-80 rounded-full bg-[#4CC1B0]/20 blur-[90px]" />
+        <div className="absolute right-0 top-0 h-[26rem] w-[26rem] rounded-full bg-[#7f8dff]/15 blur-[120px]" />
+        <div className="absolute bottom-10 right-10 h-44 w-44 rounded-full border border-white/12 bg-white/8 blur-[2px]" />
 
         <div className="relative mx-auto flex min-h-[100svh] max-w-[1320px] items-end px-5 pb-10 pt-28 sm:px-6 sm:pb-14 sm:pt-32 lg:px-8 lg:pb-16 lg:pt-36">
-          <div className="grid w-full gap-8 xl:grid-cols-[0.9fr_0.1fr] xl:items-end">
-            <div className="max-w-[700px]">
-              <motion.span initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }} className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 backdrop-blur">
+          <div className="grid w-full gap-8 xl:grid-cols-[0.88fr_0.12fr] xl:items-end">
+            <div className="max-w-[760px]">
+              <motion.span initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }} className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/82 backdrop-blur">
                 Ortodoncia premium en {siteConfig.city}
               </motion.span>
-              <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.08 }} className="mt-7 max-w-[11ch] font-serif text-[3.4rem] leading-[0.9] tracking-[-0.05em] text-white sm:text-[4.8rem] lg:text-[6.4rem] xl:text-[7.2rem]">
+              <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.08 }} className="mt-7 max-w-[10.5ch] font-serif text-[3.5rem] leading-[0.9] tracking-[-0.06em] text-white sm:text-[4.9rem] lg:text-[6.3rem] xl:text-[7.2rem]">
                 Una sonrisa bien cuidada cambia toda la experiencia.
               </motion.h1>
-              <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.18 }} className="mt-6 max-w-[620px] text-base leading-8 text-white/78 sm:text-lg">
+              <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.18 }} className="mt-6 max-w-[640px] text-base leading-8 text-white/80 sm:text-lg">
                 ORTHOCLINIX combina más de 28 años de experiencia en ortodoncia con atención cálida, tecnología de vanguardia y un proceso claro, cómodo y personalizado desde la evaluación hasta el resultado final.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.28 }} className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -265,36 +303,27 @@ export default function Home() {
                   Ver evaluación
                 </a>
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.38 }} className="mt-10 grid max-w-[560px] grid-cols-3 gap-5 border-t border-white/15 pt-6">
-                <div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/55">Experiencia</div>
-                  <div className="mt-2 font-serif text-4xl text-white">28+</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/55">Casos</div>
-                  <div className="mt-2 font-serif text-4xl text-white">2000+</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-[0.22em] text-white/55">Reseñas</div>
-                  <div className="mt-2 font-serif text-4xl text-white">33 × 5★</div>
-                </div>
+              <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.38 }} className="mt-10 grid max-w-[620px] gap-4 sm:grid-cols-3">
+                <div className="rounded-[1.6rem] border border-white/15 bg-white/10 p-4 backdrop-blur-md sm:p-5"><div className="text-[11px] uppercase tracking-[0.22em] text-white/55">Experiencia</div><div className="mt-2 font-serif text-4xl text-white">28+</div></div>
+                <div className="rounded-[1.6rem] border border-white/15 bg-white/10 p-4 backdrop-blur-md sm:p-5"><div className="text-[11px] uppercase tracking-[0.22em] text-white/55">Casos</div><div className="mt-2 font-serif text-4xl text-white">2000+</div></div>
+                <div className="rounded-[1.6rem] border border-white/15 bg-white/10 p-4 backdrop-blur-md sm:p-5"><div className="text-[11px] uppercase tracking-[0.22em] text-white/55">Reseñas</div><div className="mt-2 font-serif text-4xl text-white">33 × 5★</div></div>
               </motion.div>
             </div>
           </div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }} className="absolute bottom-4 right-4 hidden max-w-[320px] rounded-[1.6rem] border border-white/20 bg-white/10 p-5 text-white backdrop-blur-md lg:block xl:bottom-8 xl:right-8 xl:p-6">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.45 }} className="absolute bottom-5 right-5 hidden max-w-[360px] rounded-[1.8rem] border border-white/15 bg-white/10 p-5 text-white backdrop-blur-xl lg:block xl:bottom-8 xl:right-8 xl:p-6">
           <p className="text-[11px] uppercase tracking-[0.22em] text-white/70">Atención personalizada</p>
           <p className="mt-3 text-lg leading-7 text-white/95">Siempre te atiende el mismo doctor o doctora, con diagnósticos claros y un tratamiento pensado para ti.</p>
         </motion.div>
       </section>
 
-      <section className="pb-8 pt-10 sm:pb-14 sm:pt-14">
+      <section className="pb-10 pt-10 sm:pb-16 sm:pt-16">
         <div className="container-shell">
-          <Reveal className="border-y border-black/[0.08] py-8 sm:py-10">
-            <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-              <p className="font-serif text-[2.35rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3.1rem] lg:text-[3.7rem]">Cálida. Moderna. Segura. Pensada para que la experiencia se sienta distinta desde el primer momento.</p>
-              <p className="max-w-2xl text-base leading-8 text-slate sm:ml-auto sm:text-lg">Atención odontológica integral con altos estándares profesionales, tecnología de vanguardia y un entorno que transmite confianza, calma y claridad desde la primera cita.</p>
+          <Reveal className="border-y border-black/[0.08] py-9 sm:py-11">
+            <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+              <p className="font-serif text-[2.45rem] leading-[0.98] tracking-[-0.04em] text-navy sm:text-[3.2rem] lg:text-[4rem]">Cálida. Moderna. Segura. Una clínica pensada para que el tratamiento se sienta mejor desde la primera cita.</p>
+              <p className="max-w-2xl text-base leading-8 text-slate sm:ml-auto sm:text-lg">Atención odontológica integral con altos estándares profesionales, tecnología de vanguardia y un entorno que transmite confianza, calma y claridad en cada etapa del proceso.</p>
             </div>
           </Reveal>
         </div>
@@ -302,13 +331,13 @@ export default function Home() {
 
       <section id="experiencia" className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.06fr_0.94fr] xl:items-end">
-          <Reveal className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[#e7e0d8] shadow-soft sm:min-h-[620px]">
+          <Reveal className="relative min-h-[540px] overflow-hidden rounded-[2.25rem] bg-[#e7e0d8] shadow-soft sm:min-h-[660px]">
             <Image src="/assets/gallery/gallery-02.webp" alt="Ambiente editorial de Orthoclinix" fill sizes="(min-width: 1280px) 52vw, 100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10" />
           </Reveal>
           <Reveal delay={0.08} className="max-w-xl xl:pb-12">
-            <SectionKicker>La experiencia Orthoclinix</SectionKicker>
-            <h2 className="section-title mt-6">Más que corregir una sonrisa: una clínica que busca que todo el proceso se sienta mejor.</h2>
+            <SectionKicker dark>La experiencia Orthoclinix</SectionKicker>
+            <h2 className="section-title mt-6">Más que corregir una sonrisa: una clínica que cuida cómo se vive todo el proceso.</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">ORTHOCLINIX ofrece atención odontológica integral con trato cálido y personalizado, altos estándares profesionales, tecnología de vanguardia y un entorno pensado para transmitir tranquilidad.</p>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">Aquí no solo se trabaja una sonrisa armónica. También se aborda la mordida, la salud dental integral y la prevención de problemas futuros, con una experiencia clara y cercana de principio a fin.</p>
             <Link href={whatsappLink} target="_blank" rel="noreferrer" className="mt-8 inline-flex rounded-full bg-navy px-6 py-3.5 text-sm font-medium text-white transition hover:-translate-y-0.5">Solicitar evaluación</Link>
@@ -316,23 +345,22 @@ export default function Home() {
         </div>
       </section>
 
+      <FullBleedSection kicker="Experiencia clínica" title="Un espacio que transmite calma, claridad y confianza desde que llegas." text="La atención cálida, el seguimiento cercano y la consistencia del mismo doctor o doctora durante el tratamiento ayudan a que cada cita se sienta más clara, más cómoda y mucho más humana." image="/assets/fullscreen/fullscreen-01.webp" alt="Escena editorial full screen para Orthoclinix" />
+
       <section id="servicios" className="py-16 sm:py-24">
-        <div className="container-shell grid gap-10 xl:grid-cols-[0.86fr_1.14fr] xl:items-start">
+        <div className="container-shell grid gap-10 xl:grid-cols-[0.84fr_1.16fr] xl:items-start">
           <Reveal className="max-w-md xl:sticky xl:top-28">
-            <SectionKicker>Servicios principales</SectionKicker>
-            <h2 className="section-title mt-6">Tratamientos presentados con una lectura limpia, premium y fácil de recorrer.</h2>
+            <SectionKicker dark>Servicios principales</SectionKicker>
+            <h2 className="section-title mt-6">Tratamientos presentados con una lectura más limpia, elegante y fácil de recorrer.</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">Se prioriza lo que realmente ayuda a convertir: ortodoncia tradicional y estética, junto con tratamientos complementarios que refuerzan la atención integral.</p>
-            <div className="mt-8 overflow-hidden rounded-[1.85rem] bg-[#e7e1d9] shadow-card">
-              <div className="relative aspect-[4/5]">
-                <Image src="/assets/gallery/gallery-04.webp" alt="Escena clínica editorial" fill sizes="(min-width: 1280px) 28vw, 100vw" className="object-cover" />
-              </div>
-            </div>
+            <div className="mt-8 overflow-hidden rounded-[2rem] bg-[#e7e1d9] shadow-card"><div className="relative aspect-[4/5]"><Image src="/assets/gallery/gallery-04.webp" alt="Escena clínica editorial" fill sizes="(min-width: 1280px) 28vw, 100vw" className="object-cover" /></div></div>
           </Reveal>
 
           <div className="space-y-1 border-t border-black/10">
             {services.map((service, index) => (
-              <Reveal key={service[0]} delay={index * 0.05} className="grid gap-4 border-b border-black/10 py-6 sm:grid-cols-[0.95fr_1.05fr] sm:py-7">
-                <h3 className="font-serif text-[2rem] leading-[1.02] tracking-[-0.03em] text-navy sm:text-[2.25rem]">{service[0]}</h3>
+              <Reveal key={service[0]} delay={index * 0.05} className="grid gap-4 border-b border-black/10 py-6 sm:grid-cols-[80px_0.82fr_1.18fr] sm:items-start sm:py-8">
+                <span className="font-serif text-[2.1rem] leading-none text-teal sm:pt-1">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="font-serif text-[2rem] leading-[1.02] tracking-[-0.03em] text-navy sm:text-[2.3rem]">{service[0]}</h3>
                 <p className="max-w-xl text-base leading-8 text-slate sm:pt-1">{service[1]}</p>
               </Reveal>
             ))}
@@ -340,18 +368,18 @@ export default function Home() {
         </div>
       </section>
 
-      <EditorialVideo id="video-01" title="Un primer video con espacio suficiente para recorrido, ambiente o explicación clínica." text="Este bloque está pensado para que el material audiovisual se vea grande, limpio y realmente importante dentro de la landing, no como un elemento secundario perdido entre tarjetas." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" />
+      <EditorialVideo id="video-01" title="Conoce mejor el ambiente, la forma de atención y el cuidado puesto en cada detalle." text="Este espacio permite mostrar recorrido de la clínica, explicación clínica o una pieza audiovisual que refuerce la sensación de confianza, calidez y profesionalismo." src="/assets/videos/video-01.mp4" poster="/assets/videos/video-01-poster.webp" />
 
       <section className="py-16 sm:py-24">
         <div className="container-shell">
           <Reveal className="max-w-3xl">
-            <SectionKicker>Imágenes seleccionadas</SectionKicker>
-            <h2 className="section-title mt-6">Cuatro espacios visuales grandes y mejor distribuidos para que la landing respire mucho más.</h2>
+            <SectionKicker dark>Imágenes seleccionadas</SectionKicker>
+            <h2 className="section-title mt-6">Una clínica que cuida tanto el resultado como la forma en que se siente cada visita.</h2>
           </Reveal>
           <div className="mt-10 grid auto-rows-fr gap-4 lg:grid-cols-12">
             {gallery.map((item, index) => (
               <Reveal key={item[0]} delay={index * 0.05} className={item[2]}>
-                <div className="relative h-full overflow-hidden rounded-[1.85rem] bg-[#ebe5dd] shadow-card">
+                <div className="relative h-full overflow-hidden rounded-[2rem] bg-[#ebe5dd] shadow-card">
                   <Image src={item[0]} alt={item[1]} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/8" />
                 </div>
@@ -364,7 +392,7 @@ export default function Home() {
       <section className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:items-end">
           <Reveal className="max-w-xl xl:pb-8">
-            <SectionKicker>Por qué elegir Orthoclinix</SectionKicker>
+            <SectionKicker dark>Por qué elegir Orthoclinix</SectionKicker>
             <h2 className="section-title mt-6">Experiencia, trato humano y consistencia clínica en cada etapa.</h2>
             <div className="mt-8 space-y-5">
               {differentiators.map((item, index) => (
@@ -375,24 +403,24 @@ export default function Home() {
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.08} className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[#e8e2da] shadow-soft sm:min-h-[620px]">
+          <Reveal delay={0.08} className="relative min-h-[540px] overflow-hidden rounded-[2.25rem] bg-[#e8e2da] shadow-soft sm:min-h-[660px]">
             <Image src="/assets/gallery/gallery-06.webp" alt="Orthoclinix atención clínica premium" fill sizes="(min-width: 1280px) 48vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10" />
           </Reveal>
         </div>
       </section>
 
-      <EditorialVideo id="video-02" title="Un segundo video para testimonios, resultados o una pieza más emocional." text="Aquí el video puede reforzar confianza con pacientes reales, resultados, ambiente humano o el tipo de trato que diferencia a la clínica. El layout le da presencia suficiente para cerrar mejor la conversión." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed />
+      <EditorialVideo id="video-02" title="Historias, resultados y una experiencia clínica que se siente más cercana de principio a fin." text="Este segundo video puede reforzar confianza con pacientes reales, testimonios, resultados o una pieza emocional que ayude a cerrar mejor la conversión." src="/assets/videos/video-02.mp4" poster="/assets/videos/video-02-poster.webp" reversed />
 
       <section id="proceso" className="py-16 sm:py-24">
         <div className="container-shell grid gap-10 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
           <Reveal className="max-w-md xl:sticky xl:top-28">
-            <SectionKicker>Proceso</SectionKicker>
+            <SectionKicker dark>Proceso</SectionKicker>
             <h2 className="section-title mt-6">Cinco pasos claros para pasar de la evaluación al resultado con mucha más tranquilidad.</h2>
           </Reveal>
           <div className="space-y-5">
             {processSteps.map((step, index) => (
-              <Reveal key={step[0]} delay={index * 0.05} className="grid gap-4 rounded-[1.7rem] border border-white/60 bg-white/[0.72] p-5 shadow-card backdrop-blur sm:grid-cols-[80px_1fr] sm:p-6">
+              <Reveal key={step[0]} delay={index * 0.05} className="grid gap-4 rounded-[1.85rem] border border-white/70 bg-white/[0.78] p-5 shadow-card backdrop-blur sm:grid-cols-[80px_1fr] sm:p-7">
                 <div className="font-serif text-[3rem] leading-none text-teal">{step[0]}</div>
                 <div>
                   <h3 className="font-serif text-[2rem] leading-[1] tracking-[-0.03em] text-navy">{step[1]}</h3>
@@ -404,17 +432,19 @@ export default function Home() {
         </div>
       </section>
 
+      <FullBleedSection kicker="Evaluación clara" title="Todo empieza con una valoración bien explicada y pensada para darte seguridad." text="Radiografías, fotos, escaneo digital cuando corresponde y una presentación clara del caso ayudan a que el siguiente paso se tome con más tranquilidad, mejor contexto y total confianza." image="/assets/fullscreen/fullscreen-02.webp" alt="Escena editorial full screen secundaria para Orthoclinix" align="right" />
+
       <section id="evaluacion" className="py-16 sm:py-24">
         <div className="container-shell grid gap-8 xl:grid-cols-[1.04fr_0.96fr] xl:items-start">
           <Reveal className="max-w-xl">
-            <SectionKicker>Evaluación y precios</SectionKicker>
+            <SectionKicker dark>Evaluación y precios</SectionKicker>
             <h2 className="section-title mt-6">Una presentación cuidada de la inversión, pensada para que el siguiente paso sea escribir por WhatsApp.</h2>
             <p className="mt-5 text-base leading-8 text-slate sm:text-lg">La consulta básica y la consulta con escaneo digital quedan destacadas con una estructura más limpia, mientras los extras se mantienen claros y fáciles de escanear.</p>
           </Reveal>
-          <Reveal delay={0.08} className="rounded-[2rem] bg-[#f3eee7] p-6 shadow-soft sm:p-8">
+          <Reveal delay={0.08} className="rounded-[2.1rem] bg-[#f3eee7] p-6 shadow-soft sm:p-8">
             <div className="grid gap-5 xl:grid-cols-2">
               {prices.map((plan, index) => (
-                <div key={plan.title} className={`rounded-[1.75rem] border p-6 ${index === 1 ? 'border-teal/30 bg-white shadow-card' : 'border-black/[0.08] bg-white/[0.72]'}`}>
+                <div key={plan.title} className={`rounded-[1.85rem] border p-6 ${index === 1 ? 'border-teal/30 bg-white shadow-card' : 'border-black/[0.08] bg-white/[0.72]'}`}>
                   <p className="text-[11px] uppercase tracking-[0.22em] text-slate">{index === 1 ? 'Consulta recomendada' : 'Consulta'}</p>
                   <h3 className="mt-4 font-serif text-[2rem] leading-[1] tracking-[-0.03em] text-navy">{plan.title}</h3>
                   <div className="mt-5 font-serif text-[3.5rem] leading-none text-ink">{plan.price}</div>
@@ -426,7 +456,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div className="mt-6 rounded-[1.75rem] border border-black/[0.08] bg-white/[0.72] p-6">
+            <div className="mt-6 rounded-[1.85rem] border border-black/[0.08] bg-white/[0.72] p-6">
               <p className="text-[11px] uppercase tracking-[0.22em] text-slate">Extras</p>
               <div className="mt-4 space-y-3">
                 {extras.map((extra) => (
@@ -445,7 +475,7 @@ export default function Home() {
       <section id="faq" className="py-16 sm:py-24">
         <div className="container-shell grid gap-10 xl:grid-cols-[0.86fr_1.14fr] xl:items-start">
           <Reveal className="max-w-md xl:sticky xl:top-28">
-            <SectionKicker>FAQ</SectionKicker>
+            <SectionKicker dark>FAQ</SectionKicker>
             <h2 className="section-title mt-6">La información importante, clara y fácil de recorrer.</h2>
           </Reveal>
           <div className="space-y-4">
@@ -453,7 +483,7 @@ export default function Home() {
               const isOpen = openFaq === index;
               return (
                 <Reveal key={item[0]} delay={index * 0.04}>
-                  <button type="button" onClick={() => setOpenFaq(isOpen ? -1 : index)} className="w-full rounded-[1.6rem] border border-white/60 bg-white/[0.74] p-5 text-left shadow-card backdrop-blur sm:p-6">
+                  <button type="button" onClick={() => setOpenFaq(isOpen ? -1 : index)} className="w-full rounded-[1.75rem] border border-white/60 bg-white/[0.74] p-5 text-left shadow-card backdrop-blur sm:p-6">
                     <div className="flex items-center justify-between gap-4">
                       <h3 className="font-medium text-ink sm:text-lg">{item[0]}</h3>
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-black/10 text-navy">{isOpen ? '−' : '+'}</span>
@@ -470,7 +500,7 @@ export default function Home() {
       </section>
 
       <section className="px-5 pb-12 pt-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1280px] overflow-hidden rounded-[2.3rem] bg-[#0f1537] text-white shadow-soft">
+        <div className="mx-auto max-w-[1280px] overflow-hidden rounded-[2.4rem] bg-[#0f1537] text-white shadow-soft">
           <div className="grid gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:items-stretch">
             <Reveal className="relative z-10 p-8 sm:p-10 lg:p-14">
               <SectionKicker>Agenda tu evaluación</SectionKicker>
@@ -490,7 +520,7 @@ export default function Home() {
         <div className="container-shell">
           <div className="grid gap-8 border-t border-black/[0.08] pt-8 sm:grid-cols-2 xl:grid-cols-[1fr_0.8fr_0.8fr]">
             <div>
-              <div className="flex items-center gap-3"><div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-white/70 bg-white/90 shadow-card"><div className="absolute inset-[7px] rounded-[18px] border border-[#232662]/10" /><span className="relative font-serif text-xl font-semibold tracking-[-0.03em] text-navy">O</span></div><div><div className="font-serif text-2xl leading-none tracking-[0.08em] text-navy">ORTHOCLINIX</div><div className="mt-1 text-[10px] uppercase tracking-[0.28em] text-slate">Ortodoncia premium</div></div></div>
+              <div className="flex items-center gap-3"><LogoMark dark /></div>
               <p className="mt-5 max-w-sm text-sm leading-7 text-slate sm:text-base">Clínica de Ortodoncia y Odontología General con atención cálida, personalizada y premium en {siteConfig.city}.</p>
             </div>
             <div>
